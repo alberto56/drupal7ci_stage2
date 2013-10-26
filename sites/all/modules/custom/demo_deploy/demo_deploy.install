@@ -3,6 +3,12 @@
 function demo_deploy_install() {
   theme_enable(array('adaptivetheme', 'corolla'));
   variable_set('theme_default', 'corolla');
+  for ($i = 7001; $i < 8000; $i++) {
+    $candidate = 'demo_deploy_update_' . $i;
+    if (function_exists($candidate)) {
+      $candidate();
+    }
+  }
 }
 
 function demo_deploy_update_7002() {
@@ -16,4 +22,14 @@ function demo_deploy_update_7002() {
       ->condition('theme', $mytheme, '=')
       ->execute();
   }
+}
+
+function demo_deploy_update_7004() {
+  module_enable(array('admin_menu_toolbar'));
+  module_disable(array('toolbar'));
+}
+
+function demo_deploy_update_7005() {
+  module_enable(array('demo_feature'));
+  variable_set('site_frontpage', 'gallery');
 }
