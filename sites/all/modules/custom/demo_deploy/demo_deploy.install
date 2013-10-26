@@ -33,3 +33,8 @@ function demo_deploy_update_7005() {
   module_enable(array('demo_feature'));
   variable_set('site_frontpage', 'gallery');
 }
+
+function demo_deploy_update_7006() {
+  features_revert(array('demo_feature' => array('views_view')));
+
+}
