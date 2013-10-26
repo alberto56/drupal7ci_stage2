@@ -4,3 +4,16 @@ function demo_deploy_install() {
   theme_enable(array('adaptivetheme', 'corolla'));
   variable_set('theme_default', 'corolla');
 }
+
+function demo_deploy_update_7002() {
+  $mytheme = 'corolla';
+  foreach (array('login') as $block) {
+    $num_updated = db_update('block') // Table name no longer needs {}
+      ->fields(array(
+        'region' => '-1',
+      ))
+      ->condition('delta', $block, '=')
+      ->condition('theme', $mytheme, '=')
+      ->execute();
+  }
+}
