@@ -29,12 +29,14 @@ function demo_deploy_update_7004() {
   module_disable(array('toolbar'));
 }
 
-function demo_deploy_update_7005() {
-  module_enable(array('demo_feature'));
+function demo_deploy_update_7009() {
+  module_enable(array('features', 'demo_feature'));
   variable_set('site_frontpage', 'gallery');
 }
 
-function demo_deploy_update_7006() {
+function demo_deploy_update_7010() {
+  features_revert(array('demo_feature' => array('node')));
+  features_revert(array('demo_feature' => array('image')));
+  features_revert(array('demo_feature' => array('context')));
   features_revert(array('demo_feature' => array('views_view')));
-
 }
