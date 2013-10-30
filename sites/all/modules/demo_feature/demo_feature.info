@@ -1,8 +1,17 @@
 name = demo_feature
 core = 7.x
 package = Features
+dependencies[] = features
+dependencies[] = image
+dependencies[] = text
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
+features[field_base][] = body
+features[field_base][] = field_img
+features[field_instance][] = node-xyz-body
+features[field_instance][] = node-xyz-field_img
+features[image][] = image
+features[node][] = xyz
 features[views_view][] = gallery
 features_exclude[dependencies][ctools] = ctools
