@@ -34,5 +34,6 @@ class demoDeployTestCase extends DrupalWebTestCase {
   public function testModule() {
     $this->drupalGet('/');
     $this->assertRaw('themes/corolla', 'default theme is in the html source');
+    $this->assertNoText('Powered', 'Powered by block has been removed.');
   }
 }
