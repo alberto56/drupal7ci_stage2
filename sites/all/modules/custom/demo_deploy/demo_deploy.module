@@ -1,1 +1,36 @@
 <?php
+
+/**
+ * Helper function to remove a block from an active region
+ *
+ * See http://dcycleproject.org/blog/32/disabling-blocks
+ *
+ * @param $theme
+ *   An array of themes from which to remove the blocks.
+ * @param $blocks
+ *   An associative array of blocks, in this format:
+ *   array(
+ *     'user' => array(
+ *       'login',
+ *     ),
+ *     ...
+ *
+ * @throws
+ *   Exception
+ */
+function demo_deploy_remove_block($themes, $blocks) {
+  foreach ($themes as $theme) {
+    foreach ($blocks as $module => $deltas) {
+      foreach ($deltas as $delta) {
+        $num_updated = db_update('block')
+          ->fields(array(
+            'region' => '-1',
+          ))
+          ->condition('module', $module, '=')
+          ->condition('delta', $delta, '=')
+          ->condition('theme', $theme, '=')
+          ->execute();
+      }
+    }
+  }
+}

@@ -12,16 +12,7 @@ function demo_deploy_install() {
 }
 
 function demo_deploy_update_7002() {
-  $mytheme = 'corolla';
-  foreach (array('login') as $block) {
-    $num_updated = db_update('block') // Table name no longer needs {}
-      ->fields(array(
-        'region' => '-1',
-      ))
-      ->condition('delta', $block, '=')
-      ->condition('theme', $mytheme, '=')
-      ->execute();
-  }
+  demo_deploy_remove_block(array('corolla'), array('user' => array('login')));
 }
 
 function demo_deploy_update_7004() {
@@ -39,4 +30,11 @@ function demo_deploy_update_7010() {
   features_revert(array('demo_feature' => array('image')));
   features_revert(array('demo_feature' => array('context')));
   features_revert(array('demo_feature' => array('views_view')));
+}
+
+/**
+ * #1 remove Powered by Drupal block
+ */
+function demo_deploy_update_7011() {
+  demo_deploy_remove_block(array('corolla'), array('system' => array('powered-by')));
 }
